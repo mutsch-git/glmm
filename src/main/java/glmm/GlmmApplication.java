@@ -9,5 +9,4 @@ public class GlmmApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(GlmmApplication.class, args);
 	}
-
 }
