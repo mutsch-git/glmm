@@ -28,17 +28,48 @@ public class StudentDAOImpl implements StudentDAO
     }
 
     @Override
-    @Transactional
     public Student findById(int id)
     {
         return this.entityManager.find(Student.class, id);
     }
 
     @Override
-    @Transactional
     public List<Student> findAll()
     {
-        TypedQuery<Student> query = this.entityManager.createQuery("FROM Student", Student.class);
+        TypedQuery<Student> query = this.entityManager.createQuery("from Student order by lastName", Student.class);
         return query.getResultList();
     }
+
+    @Override
+    public List<Student> findByLastName(String lastName) 
+    {
+        
+        TypedQuery<Student> query = this.entityManager.createQuery("from Student where lastName=:lastname", Student.class);
+        query.setParameter("lastname", lastName);
+        return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) 
+    {
+        this.entityManager.merge(student);    
+    }
+
+    @Override
+    @Transactional
+    public void delete(int id) {
+        Student student = this.findById(id);
+
+        if (student != null) {
+            this.entityManager.remove(student);
+        }
+    }
+
+    @Override
+    @Transactional
+    public int deleteAll() {
+        int numRowsDeleted = this.entityManager.createQuery("delete from Student").executeUpdate();
+        return numRowsDeleted;
+    }    
 }

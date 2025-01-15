@@ -22,8 +22,8 @@ public class GlmmApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO)
 	{
 		 	 return runner -> {
-				System.out.println("List all students");
-				this.getAllStudents(studentDAO);	
+				System.out.println("delete student with id 1");
+				this.deleteStudent(1, studentDAO);
 			};
 	}
 
@@ -47,5 +47,28 @@ public class GlmmApplication {
 		for (Student student : students) {
 			System.out.println(student);
 		}
+	}
+
+	private void getStudentByLastName(String lastName, StudentDAO studentDAO)
+	{
+		List<Student> students = studentDAO.findByLastName(lastName);
+
+		for (Student student : students) {
+			System.out.println(student);
+		}
+	}
+
+	private void updateStudent(StudentDAO studentDAO)
+	{
+		Student student = studentDAO.findById(2);
+		student.setFirstName("Henry");
+		studentDAO.update(student);
+
+		System.out.println(studentDAO.findById(2));
+	}
+
+	private void deleteStudent(int id, StudentDAO studentDAO)
+	{
+		studentDAO.delete(id);
 	}
 }
