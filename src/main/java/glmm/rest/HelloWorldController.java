@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-public class HelloWorldController {
-
+public class HelloWorldController 
+{
     @Value("${coach.name}")
     private String coachName;
 
@@ -19,5 +19,4 @@ public class HelloWorldController {
     {
         return "Hello World from trainer " + this.coachName + " and team " + this.teamName;
     }
-
 }
