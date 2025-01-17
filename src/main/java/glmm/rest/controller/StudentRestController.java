@@ -47,7 +47,7 @@ public class StudentRestController
         Student student = this.studentDAO.findById(id);
 
         if (student == null) {
-            throw new StudentNotFoundException("Student id " + id + " not found");
+            throw new StudentNotFoundException("Student id not found: " + id);
         }
 
         return student;
