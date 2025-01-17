@@ -22,18 +22,24 @@ public class GlmmApplication {
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO)
 	{
 		 	 return runner -> {
-				System.out.println("delete student with id 1");
-				this.deleteStudent(1, studentDAO);
+				System.out.println("create student with id 1");
+				//this.createStudent(studentDAO);
 			};
 	}
 
 	private void createStudent(StudentDAO studentDAO)
 	{
-		Student tmpStudent = new Student("Hank", "Hazzard", "hank.hazzard@test.com");
+		Student tmpStudent = new Student("Mary", "Jane", "mary.jane@test.com");
 
 		System.out.println("Save the student");
 
 		studentDAO.save(tmpStudent);
+
+		Student tmpStudent1 = new Student("Sveni", "Schickel", "sven-schickel@yahoo.com");
+
+		System.out.println("Save the student");
+
+		studentDAO.save(tmpStudent1);
 
 		System.out.println("Student saved, id = " + tmpStudent.getId());
 
