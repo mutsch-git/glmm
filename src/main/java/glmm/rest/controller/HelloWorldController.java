@@ -1,4 +1,4 @@
-package glmm.rest;
+package glmm.rest.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,4 +1,4 @@
-package glmm.rest;
+package glmm.rest.controller;
 
 import java.util.List;
 
@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import glmm.database.dao.StudentDAO;
 import glmm.database.entity.Student;
+import glmm.rest.exception.StudentNotFoundException;
+import glmm.rest.response.StudentErrorResponse;
 import jakarta.annotation.PostConstruct;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -39,6 +44,20 @@ public class StudentRestController
     @GetMapping("/students/{id}")
     public Student getStudent(@PathVariable int id) 
     {
-        return this.studentDAO.findById(id);
+        Student student = this.studentDAO.findById(id);
+
+        if (student == null) {
+            throw new StudentNotFoundException("Student id " + id + " not found");
+        }
+
+        return student;
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc)
+    {
+        StudentErrorResponse error = new StudentErrorResponse(HttpStatus.NOT_FOUND.value(), exc.getMessage(), System.currentTimeMillis());
+        
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 }
