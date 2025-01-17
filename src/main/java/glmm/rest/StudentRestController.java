@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import glmm.database.dao.StudentDAO;
 import glmm.database.entity.Student;
+import jakarta.annotation.PostConstruct;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,16 +17,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class StudentRestController 
 {
     private StudentDAO studentDAO;
+    private List<Student> students;
 
     public StudentRestController(StudentDAO studentDAO)
     {
         this.studentDAO = studentDAO;
     }
 
+    @PostConstruct
+    public void loadStudents()
+    {
+        this.students = this.studentDAO.findAll();
+    }
+
     @GetMapping("/students")
     public List<Student> getStudents() 
     {
-        return this.studentDAO.findAll();
+        return this.students;
     } 
 
     @GetMapping("/students/{id}")
