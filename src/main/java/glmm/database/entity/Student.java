@@ -25,6 +25,10 @@ public class Student
     @Column(name="email")
     private String email;
 
+    @Column(name="active")
+    private boolean active;
+
+
     public Student(String firstName, String lastName, String email) 
     {
         this.firstName = firstName;
@@ -74,9 +78,17 @@ public class Student
         this.email = email;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() 
     {
-        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+        return "Student [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", active" + active + "]";
     }
 }
