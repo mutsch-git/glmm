@@ -79,11 +79,13 @@ public class Student
         this.email = email;
     }
 
-    public boolean isActive() {
+    public boolean isActive() 
+    {
         return active;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(boolean active) 
+    {
         this.active = active;
     }
 
