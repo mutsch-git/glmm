@@ -29,11 +29,12 @@ public class Student
     private boolean active;
 
 
-    public Student(String firstName, String lastName, String email) 
+    public Student(String firstName, String lastName, String email, boolean active) 
     {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.active = active;
     }
 
     public Student() {}
