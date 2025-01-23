@@ -8,12 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 import glmm.database.dao.StudentDAO;
 import glmm.database.entity.Student;
 import glmm.rest.exception.StudentNotFoundException;
-import glmm.rest.response.StudentErrorResponse;
 import jakarta.annotation.PostConstruct;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -51,21 +47,5 @@ public class StudentRestController
         }
 
         return student;
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exc)
-    {
-        StudentErrorResponse error = new StudentErrorResponse(HttpStatus.NOT_FOUND.value(), exc.getMessage(), System.currentTimeMillis());
-        
-        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(Exception exc) 
-    {
-        StudentErrorResponse error = new StudentErrorResponse(HttpStatus.BAD_REQUEST.value(), exc.getMessage(), System.currentTimeMillis());
-        
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 }
