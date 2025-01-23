@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import glmm.database.dao.StudentDAO;
+import glmm.database.dao.IStudentDAO;
 import glmm.database.entity.Student;
 
 import java.util.List;;
@@ -19,7 +19,7 @@ public class GlmmApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(StudentDAO studentDAO)
+	public CommandLineRunner commandLineRunner(IStudentDAO studentDAO)
 	{
 		 	 return runner -> {
 				System.out.println("create student with id 1");
@@ -27,7 +27,7 @@ public class GlmmApplication {
 			};
 	}
 
-	private void createStudent(StudentDAO studentDAO)
+	private void createStudent(IStudentDAO studentDAO)
 	{
 		Student tmpStudent = new Student("Mary", "Jane", "mary.jane@test.com", true);
 
@@ -46,7 +46,7 @@ public class GlmmApplication {
 		System.out.println("Read the student from DB: " + studentDAO.findById(tmpStudent.getId()));
 	}
 
-	private void getAllStudents(StudentDAO studentDAO) 
+	private void getAllStudents(IStudentDAO studentDAO) 
 	{
 		List<Student> students = studentDAO.findAll();
 
@@ -55,7 +55,7 @@ public class GlmmApplication {
 		}
 	}
 
-	private void getStudentByLastName(String lastName, StudentDAO studentDAO)
+	private void getStudentByLastName(String lastName, IStudentDAO studentDAO)
 	{
 		List<Student> students = studentDAO.findByLastName(lastName);
 
@@ -64,7 +64,7 @@ public class GlmmApplication {
 		}
 	}
 
-	private void updateStudent(StudentDAO studentDAO)
+	private void updateStudent(IStudentDAO studentDAO)
 	{
 		Student student = studentDAO.findById(2);
 		student.setFirstName("Henry");
@@ -73,7 +73,7 @@ public class GlmmApplication {
 		System.out.println(studentDAO.findById(2));
 	}
 
-	private void deleteStudent(int id, StudentDAO studentDAO)
+	private void deleteStudent(int id, IStudentDAO studentDAO)
 	{
 		studentDAO.delete(id);
 	}

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import glmm.database.dao.StudentDAO;
+import glmm.database.dao.IStudentDAO;
 import glmm.database.entity.Student;
 import glmm.rest.exception.StudentNotFoundException;
 import jakarta.annotation.PostConstruct;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/api")
 public class StudentRestController 
 {
-    private StudentDAO studentDAO;
+    private IStudentDAO studentDAO;
     private List<Student> students;
 
-    public StudentRestController(StudentDAO studentDAO)
+    public StudentRestController(IStudentDAO studentDAO)
     {
         this.studentDAO = studentDAO;
     }
