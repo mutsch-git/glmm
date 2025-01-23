@@ -29,13 +29,13 @@ public class GlmmApplication {
 
 	private void createStudent(StudentDAO studentDAO)
 	{
-		Student tmpStudent = new Student("Mary", "Jane", "mary.jane@test.com");
+		Student tmpStudent = new Student("Mary", "Jane", "mary.jane@test.com", true);
 
 		System.out.println("Save the student");
 
 		studentDAO.save(tmpStudent);
 
-		Student tmpStudent1 = new Student("Sveni", "Schickel", "sven-schickel@yahoo.com");
+		Student tmpStudent1 = new Student("Sveni", "Schickel", "sven-schickel@yahoo.com", true);
 
 		System.out.println("Save the student");
 
