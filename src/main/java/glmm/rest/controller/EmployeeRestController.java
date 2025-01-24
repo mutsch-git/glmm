@@ -11,6 +11,9 @@ import glmm.service.IEmployeeService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api")
@@ -40,4 +43,13 @@ public class EmployeeRestController
 
         return employee;
     }
+
+    @PostMapping("/employees")
+    public Employee addEmployee(@RequestBody Employee employee) 
+    {
+        employee.setId(0);
+        
+        return this.employeeService.save(employee);
+    }
+    
 }
